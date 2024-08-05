@@ -5,6 +5,7 @@ import tensorflow as tf
 import PyPDF2
 import re
 import string
+from tensorflow.keras.preprocessing.text import Tokenizer
 
 class DataPreparation:
     def __init__(self,pdf_path,input_length):
@@ -40,6 +41,9 @@ class DataPreparation:
         
     def data_generation(self):
         data=self.data_cleaning()
+        tokenizer=Tokenizer(oov_token="OOV")
+        tokenizer.fit_on_text(data)
+        data=tokeniz
         data=data.split(" ")
         num_of_words=len(data)
         X=[]
